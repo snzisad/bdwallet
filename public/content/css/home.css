@@ -1,0 +1,125 @@
+.exchange-money img{
+    height: 75px;
+    width: 90px;
+    padding: 3px;
+    background: #fff;
+    border: 1px solid #ddd;
+    /*border-radius: 50px;*/
+}
+
+.exchange-money select{
+    font-weight: bold;
+}
+
+.exchange-money input{
+    font-weight: bold;
+}
+
+.testimonials{
+	margin: 10px;
+	margin-bottom: 20px;
+}
+
+
+.testimonials .author{
+	font-weight: bold;
+	font-size: 15px;
+	color: #000;
+}
+
+.testimonials .status{
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 15px;
+}
+
+.testimonials .text{
+	font-size: 18px;	
+	margin-top: 10px;
+	/*color: #ddd;*/
+	border-bottom: 1px solid #ddd;
+}
+
+.reserve{
+	margin-bottom: 15px;
+}
+
+.reserve img{
+	height: 60px;
+	width: 80px;
+	margin-right: 10px;
+	border: 1px solid #ddd;
+	border-radius: 15px;
+}
+.reserve h5{
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 5px;
+}
+
+.reserve span{
+	font-size: 18px;
+}
+
+.exchange_history td > img{
+	height: 20px;
+	width: 20px;
+	border-radius: 50px;
+}
+
+.exchange_history .status{
+	padding: 5px;
+	border-radius: 5px;
+
+}
+
+.confirm_order{
+	padding: 40px;
+	padding-top: 10px;
+}
+
+.confirm_order .gateway{
+	background: #efefef;
+	color: #1e2434;
+	padding: 4px;
+	font-size: 20px;
+	text-align: center;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+
+.confirm_order .gateway > img{
+	height: 20px;
+	width: 20px;
+	border-radius: 50px;
+}
+
+.confirm_order > .d-flex{
+	border-bottom: 1px solid #ddd;
+	padding: 4px;
+}
+
+.confirm_order form > .form-group {
+	margin-bottom: 0px;
+	border-bottom: 1px solid #ddd;
+	padding: 8px 0px 8px 0px;
+}
+
+.confirm_order form > .row {
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.instruction{
+	margin-top: 10px;
+	padding: 8px;
+	font-size: 16px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+
+.instruction a{
+	color: #E9E59A;
+}
