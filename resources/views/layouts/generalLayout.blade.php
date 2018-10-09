@@ -129,7 +129,7 @@
 						<div class="cr_text">Developed By: <a href="https://banglasofttech.com">Bangla Soft Tech</a></div>
 						<div class="ml-lg-auto cr_links">
 							<ul class="cr_list">
-								<li><a href="#">Frequently Asked Questions</a></li>
+								<li><a href="#">FAQ</a></li>
 								<li><a href="#">Terms of Use</a></li>
 								<li><a href="#">Privacy Policy</a></li>
 								<li><a href="#">About</a></li>

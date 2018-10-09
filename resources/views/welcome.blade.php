@@ -88,18 +88,18 @@
 
                     <div class="panel-body">
                         <div class="testimonials">
-                            <h5 class="author">Sharif Noor Zisad</h5>
+                            <h5 class="author">Kabir Ahmed</h5>
                             <span class="status text-light bg-success"><i class="fa fa-smile-o"></i> Positive</span>
                             <p class="text">Very good site</p>
                         </div>
 
                         <div class="testimonials">
-                            <h5 class="author">Sharif Noor Zisad</h5>
+                            <h5 class="author">Arifur Rahman</h5>
                             <span class="status text-light bg-danger"><i class="fa fa-frown-o"></i> Negative</span>
                             <p class="text">Service is low</p>
                         </div>
 
-                        <div class="text-right"><a href="{{asset('reviews')}}" class="btn btn-primary btn-sm">See All Testimonials <i class="fa fa-arrow-right"></i></a></div>
+                        <div class="text-right"><a href="{{asset('reviews')}}" class="btn btn-primary btn-sm">See All Reviews <i class="fa fa-arrow-right"></i></a></div>
                     </div>
                 </div>
 
