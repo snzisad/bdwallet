@@ -10,7 +10,7 @@ class ExchangeRate extends Model
 
     protected $guarded = ['_token'];
 
-    public function scopeFromGateWayName($query){
-    	return $query->join('gateway','exchange_rate.from_id','gateway.id')->select('gateway.name as from_gateway_name');
-    }
+    // public function scopeFromGateWayName($query){
+    // 	return $query->join('gateway','exchange_rate.from_id','gateway.id')->select('gateway.name as from_gateway_name');
+    // }
 }
