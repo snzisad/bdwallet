@@ -29,7 +29,7 @@
                     @foreach($requests as $request)
                         <tr>
                               <td style="text-align: center;"> 
-                                {{ $request->user->name }}
+                                {{ $request->user['name'] }}
                               </td>
                               <td  style="text-align: center;">
                                 {{ $request->from_id }}
@@ -41,10 +41,10 @@
                                 {{ $request->rate }}
                               </td>
                               <td style="text-align: center;"> 
-                                {{ $request->send_amount }} {{ $request->sent_wallet->currency->type }}
+                                {{ $request->send_amount }} {{ $request->sent_wallet['currency']['type'] }}
                               </td>
                               <td style="text-align: center;"> 
-                                {{ $request->receive_amount }} {{ $request->receive_wallet->currency->type }}
+                                {{ $request->receive_amount }} {{ $request->receive_wallet['currency']['type'] }}
                               </td>
                               <td style="text-align: center;"> 
                                 {{ $request->account }}

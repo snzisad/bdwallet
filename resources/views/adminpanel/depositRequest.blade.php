@@ -26,13 +26,13 @@
                     @foreach($requests as $request)
                         <tr>
                               <td style="text-align: center;"> 
-                                {{ $request->user->name }}
+                                {{ $request->user["name"] }}
                               </td>
                               <td  style="text-align: center;">
                                 {{ $request->wallet_id }}
                               </td>
                               <td style="text-align: center;"> 
-                                {{ $request->amount }} {{ $request->wallet->currency->type }}
+                                {{ $request->amount }} {{ $request->wallet['currency']['type'] }}
                               </td>
                               <td style="text-align: center;"> 
                                 {{ $request->transaction_id }}
