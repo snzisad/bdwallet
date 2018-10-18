@@ -119,9 +119,9 @@
                           <tbody>
                             @foreach($exchange_history as $history)
                                 <tr>
-                                  <td><img src="{{ asset('/picture/icon/'.$history->send_from_data->icon)}}"> {{ $history->send_from_data->name }}</td>
-                                  <td><img src="{{ asset('/picture/icon/'.$history->send_to_data->icon)}}"> {{ $history->send_to_data->name }}</td>
-                                  <td>{{ $history->send_amount }} {{ $history->send_to_data->currency->type }}</td>
+                                  <td><img src="{{ asset('/picture/icon/'.$history->send_from_data['icon'])}}"> {{ $history->send_from_data['name'] }}</td>
+                                  <td><img src="{{ asset('/picture/icon/'.$history->send_to_data['icon'])}}"> {{ $history->send_to_data['name'] }}</td>
+                                  <td>{{ $history->send_amount }} {{ $history->send_to_data['currency']['type'] }}</td>
                                   <td>
                                     @if($history->status == "Processing")
                                       <span class="status text-light bg-primary"><i class="fa fa-clock-o"></i> Processing</span>
