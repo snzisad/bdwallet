@@ -7,6 +7,9 @@ use App\Gateway;
 use App\News;
 use App\ExchangeHistory;
 use App\ExchangeRate;
+use App\Wallet;
+use App\Message;
+use App\Reviews;
 
 class HomeController extends Controller
 {
@@ -27,15 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $all_gateway = Gateway::orderBy('name','asc')->join('balance_type','gateway.type','balance_type.id')->get();
+        $all_gateway = Gateway::orderBy('name','asc')->get();
         $rate = ExchangeRate::where('from_id', $all_gateway[0]->name)->where('to_id', $all_gateway[0]->name)->first();
-        $exchange_history = ExchangeHistory::orderBy('exchange_history.id','desc')->join('gateway', 'exchange_history.from_id', 'gateway.name')->join('balance_type', 'gateway.type', 'balance_type.id')->get();
+        $exchange_history = ExchangeHistory::orderBy('exchange_history.id','desc')->get();
         $news = News::first();
+        $reviews = Reviews::orderBy('id', "desc")->take(10)->get();
 
-        // $exchange_history = ExchangeHistory::limit(10);
-
-
-        return view('welcome')->with(compact("all_gateway","rate","exchange_history","news"));
+        return view('welcome')->with(compact("all_gateway","rate","exchange_history","news", "reviews"));
     }
 
     public function getExchangeInfo(Request $request){
@@ -48,9 +49,8 @@ class HomeController extends Controller
         $to = $request->to;
 
         $from_data = Gateway::where('name', $from)->first();
-        $to_data = Gateway::where('name', $to)->join('balance_type','gateway.type','balance_type.id')->first();
-
-        $rate = ExchangeRate::where('from_id',$from)->where('to_id',$to)->first();
+        $to_data = Gateway::where('name', $to)->first();
+        $rate = ExchangeRate::where('from_id', $from)->where('to_id', $to)->first();
 
 
         return response()->json([
@@ -66,5 +66,23 @@ class HomeController extends Controller
         ]);
 
         return redirect('track/0/'.$request->exchange_id); 
+    }
+
+    public function sendMessage(Request $request){
+        $this->validate($request, [
+            "name" => "required",
+            "email" => "required",
+            "email" => "required",
+        ]);
+
+        Message::create($request->all());
+
+        return redirect()->back()->withErrors(["message"=>"Thanks for your message. We'll reply you soon"]); 
+    }
+
+    public function viewAllReview(){
+        $reviews = Reviews::orderBy('id', "desc")->get();
+
+        return view('userReview')->with(compact("reviews"));
     }
 }

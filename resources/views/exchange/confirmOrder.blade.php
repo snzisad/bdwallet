@@ -26,11 +26,11 @@
                           </div>
                           <div class="d-flex">
                               <div class="mr-auto p-2">Amount Send: </div>
-                              <div class="p-2">{{ $request->send_amount }} {{ $send_from->type }}</div>
+                              <div class="p-2">{{ $request->send_amount }} {{ $send_from->currency->type }}</div>
                           </div>
                           <div class="d-flex">
                               <div class="mr-auto p-2">Amount Receive: </div>
-                              <div class="p-2">{{ $request->receive_amount }} {{ $send_to->type }}</div>
+                              <div class="p-2">{{ $request->receive_amount }} {{ $send_to->currency->type }}</div>
                           </div>
 
                           <div class="form-group row" style="margin-top: 10px; ">
@@ -76,14 +76,14 @@
                           </div>
                           <div class="d-flex">
                               <div class="mr-auto p-2">Amount: </div>
-                              <div class="p-2">{{ $request->send_amount }} {{ $send_from->type }}</div>
+                              <div class="p-2">{{ $request->send_amount }} {{ $send_from->currency->type }}</div>
                           </div>
                           <div class="d-flex">
                               <div class="mr-auto p-2">Your Phone Number: </div>
                               <div class="p-2 phone_number"></div>
                           </div>
                           <div class="d-flex">
-                              <div class="mr-auto p-2">Our Account Number: </div>
+                              <div class="mr-auto p-2">Our Merchant Account: </div>
                               <div class="p-2">{{ $send_from->account }}</div>
                           </div>
 

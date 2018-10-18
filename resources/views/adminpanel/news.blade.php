@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="form-group">
-			            <TEXTAREA name="text" placeholder="Enter News" required autofocus>{{ $news->text }}</TEXTAREA>
+			            <TEXTAREA name="text" class="form-control" placeholder="Enter News" required autofocus style="height: 150px; width: 400px;">{{ $news->text }}</TEXTAREA>
 			        </div>
 				</div>
 			</div>

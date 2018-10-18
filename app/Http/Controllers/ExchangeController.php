@@ -15,15 +15,7 @@ class ExchangeController extends Controller
 
 		$balance_type = BalanceType::orderBy('type','asc')->get();
 		$all_gateway = Gateway::orderBy('name','asc')->get();
-
 		$rates = ExchangeRate::get();
-
-
-			// $rates = ExchangeRate::join('gateway','exchange_rate.from_id','gateway.id')
-			// ->join('gateway','exchange_rate.to_id','gateway.id')
-			// ->join('balance_type','exchange_rate.from_rate_type','balance_type.id')
-			// ->join('balance_type','exchange_rate.to_rate_type','balance_type.id')
-			// ->get();
 		
 		return view('adminpanel/exchangeRate')->with(compact('balance_type','all_gateway',"rates"));
 	}
@@ -66,8 +58,8 @@ class ExchangeController extends Controller
 
 		$exchange_id = str_random(5).date("ymdHis");
 
-		$send_from = Gateway::where('name', $request->from_id)->join('balance_type','gateway.type','balance_type.id')->first();
-		$send_to = Gateway::where('name', $request->to_id)->join('balance_type','gateway.type','balance_type.id')->first();
+		$send_from = Gateway::where('name', $request->from_id)->first();
+		$send_to = Gateway::where('name', $request->to_id)->first();
 
 		return view('exchange/confirmOrder')->with(compact("request", "send_from",'send_to',"exchange_id"));
 	}
@@ -101,15 +93,12 @@ class ExchangeController extends Controller
 		$exchange_info = ExchangeHistory::where('exchange_id',$id)->first();
 
 		if($exchange_info){
-			$send_from_data = Gateway::where('name', $exchange_info->from_id)->join('balance_type','gateway.type','balance_type.id')->first();
-			$send_to_data = Gateway::where('name', $exchange_info->to_id)->join('balance_type','gateway.type','balance_type.id')->first();
-			
 			if($type == 'welcome'){
 				$new_request = true;
-				return view('exchange/track')->with(compact("exchange_info",'send_from_data','send_to_data','new_request'));
+				return view('exchange/track')->with(compact("exchange_info",'new_request'));
 			}
 			else{
-				return view('exchange/track')->with(compact("exchange_info",'send_from_data','send_to_data'));
+				return view('exchange/track')->with(compact("exchange_info"));
 			}
 		}
 		else{

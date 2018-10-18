@@ -25,7 +25,7 @@
                             </div>
                           @else
                             <div class="gateway">
-                              <img src="{{ asset('/picture/icon/'.$send_from_data->icon)}}"> {{ $send_from_data->name }} <i class="fa fa-long-arrow-right"></i> {{ $send_to_data->name }} <img src="{{ asset('/picture/icon/'.$send_to_data->icon)}}">
+                              <img src="{{ asset('/picture/icon/'.$exchange_info->send_from_data->icon)}}"> {{ $exchange_info->send_from_data->name }} <i class="fa fa-long-arrow-right"></i> {{ $exchange_info->send_to_data->name}} <img src="{{ asset('/picture/icon/'.$exchange_info->send_to_data->icon)}}">
                             </div>
 
                             <div class="d-flex">
@@ -34,11 +34,11 @@
                             </div>
                             <div class="d-flex">
                                 <div class="mr-auto p-2">Send: </div>
-                                <div class="p-2">{{ $exchange_info->send_amount }} {{ $send_from_data->type }}</div>
+                                <div class="p-2">{{ $exchange_info->send_amount }} {{ $exchange_info->send_from_data->currency->type }}</div>
                             </div>
                             <div class="d-flex">
                                 <div class="mr-auto p-2">Receive: </div>
-                                <div class="p-2">{{ $exchange_info->receive_amount }} {{ $send_to_data->type }}</div>
+                                <div class="p-2">{{ $exchange_info->receive_amount }} {{ $exchange_info->send_to_data->currency->type }}</div>
                             </div>
                             <div class="d-flex">
                                 <div class="mr-auto p-2">Exchange rate: </div>

@@ -103,9 +103,15 @@
 
                         <li> <a class="email-compose.html" href="{{asset('/adminpanel/exchangerequest')}}"><i class="fa fa-exchange"></i>Exchange Request</a>
                         </li>
+                        <li> <a class="email-compose.html" href="{{asset('/adminpanel/depositrequest')}}"><i class="fa fa-arrow-circle-down"></i>Deposit Request</a>
+                        </li>
+                        <li> <a class="email-compose.html" href="{{asset('/adminpanel/withdrawrequest')}}"><i class="fa fa-arrow-circle-up"></i>Withdraw Request</a>
+                        </li>
                         <li> <a class="email-compose.html" href="{{asset('/adminpanel/gateway')}}"><i class="fa fa-paypal"></i>Gateway and Reserve</a>
                         </li>
                         <li> <a class="email-compose.html" href="{{asset('adminpanel/exchangerate')}}"><i class="fa fa-money"></i>Exchange Rate</a>
+                        </li>
+                        <li> <a class="email-compose.html" href="{{asset('adminpanel/messages')}}"><i class="fa fa-envelope-o"></i>Messages</a>
                         </li>
                     </ul>
                 </nav>

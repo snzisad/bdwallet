@@ -25,7 +25,7 @@
 
 </head>
 <body style="
-	background: url('http://doablefinance.com/wp-content/uploads/2016/01/4-Critical-Details-When-Sending-International-Money-Transfers-300x216.jpg');
+	background: url('/content/bg.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;">
 
@@ -49,12 +49,12 @@
 									<li><a href="{{asset('/')}}">Exchange</a></li>
 									<li><a href="{{asset('/reviews')}}">Reviews</a></li>
 									<li><a href="{{asset('#')}}">Affiliate</a></li>
-									<li><a href="{{asset('#')}}">Contact</a></li>
+									<li><a href="{{asset('/contact')}}">Contact</a></li>
 									@if (Auth::guest())
 										<li><a href="{{ route('login') }}">Login</a></li>
 										<li><a href="{{ route('register') }}">Register</a></li>
 									@else
-										<li><a href="{{ asset('/') }}">Profile</a></li>
+										<li><a href="{{ asset('profile') }}">Profile</a></li>
 										<li>
 											<a href="{{ route('logout') }}"
 												onclick="event.preventDefault();
@@ -81,6 +81,18 @@
 				</div>
 			</div>
 		</div>
+		@if($errors->has("message"))
+		<div class="bg-success text-light text-center" style="padding: 5px; font-size: 16px;">
+			<i class="fa fa-check"></i> {{ $errors->first("message") }}
+		</div>
+		@elseif(count($errors)>0)
+		<div class="bg-danger text-light text-center" style="padding: 5px; font-size: 16px;">
+			<i class="fa fa-close"></i> 
+			@foreach($errors->all() as $error)
+				{{ $error }}
+			@endforeach
+		</div>
+		@endif
 
 	</header>
 
@@ -158,6 +170,21 @@
 
 	<!-- Custom JS -->
 	<script src="{{asset('content/js/exchangeMoney.js')}}"></script>
+	<script src="{{asset('content/js/withdrawMoney.js')}}"></script>
+	
+	<!--Start of Tawk.to Script-->
+	<script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/5bc65d4808387933e5bb9045/default';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+	</script>
+	<!--End of Tawk.to Script-->
 
 </body>
 </html>

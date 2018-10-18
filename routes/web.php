@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/reviews', function () {
-    return view('Testimonial');
+Route::get('/reviews', 'HomeController@viewAllReview');
+
+Route::get('/contact', function () {
+    return view('contact');
 });
+Route::post('/contact', 'HomeController@sendMessage')->name('sendmessage');
 
 Route::get('/track/{new}/{id}','ExchangeController@trackExchange');
 Route::post('/track','HomeController@trackExchange')->name('track');
@@ -25,6 +28,40 @@ Route::middleware('auth')->group(function(){
     Route::get('/sendexchangerequest', function(){
         return redirect('/');
     });
+
+    Route::get('/profile', 'ProfileController@index');
+
+    Route::get('/wallet', 'WalletController@index');
+
+    Route::post('saveReview',[
+        'uses' => "ProfileController@saveReview",
+        'as' => 'saveReview'
+    ]);
+
+    Route::post('changePassword', [
+        'uses' => "ProfileController@changePassword",
+        'as' => 'changePassword'
+    ]);
+
+
+    Route::post('/getwallet', 'WalletController@getWalletInfo')->name('getwalletinfo');
+
+    Route::post('/getwalletbalance', 'WalletController@getWalletBalance')->name('getwalletbalance');
+
+    Route::post('/walletexchange', [
+        'uses' => 'WalletController@walletexchange',
+        'as' => 'walletexchange'
+    ]);
+
+    Route::post('/walletdeposit', [
+        'uses' => 'WalletController@walletDeposit',
+        'as' => 'walletdeposit'
+    ]);
+
+    Route::post('/walletwithdraw', [
+        'uses' => 'WalletController@walletWithdraw',
+        'as' => 'walletwithdraw'
+    ]);
 
     Route::post('/sendexchangerequest', [
         'uses' => 'ExchangeController@sendExchangeRequest',
@@ -50,6 +87,9 @@ Route::middleware('admin')->group(function(){
     });
 
     Route::get('/adminpanel/exchangerequest', 'ExchangeController@viewExchangeRequest')->name("exchangerequest");
+    Route::get('/adminpanel/depositrequest', 'AdminController@viewDepositRequest')->name("depositrequest");
+    Route::get('/adminpanel/withdrawrequest', 'AdminController@viewWithdrawRequest')->name("withdrawrequest");
+    Route::get('/adminpanel/messages', 'AdminController@viewuserMessage');
 
     Route::get('/adminpanel/news', 'NewsController@index');
     Route::post('/adminpanel/news', 'NewsController@saveNews')->name('news');
@@ -64,6 +104,12 @@ Route::middleware('admin')->group(function(){
 
     Route::get('/adminpanel/acceptorder/{id}', 'AdminController@acceptExchangeRequest');
     Route::get('/adminpanel/rejectorder/{id}', 'AdminController@rejectExchangeRequest');
+    
+    Route::get('/adminpanel/acceptdeposit/{id}', 'AdminController@acceptDepositRequest');
+    Route::get('/adminpanel/rejectdeposit/{id}', 'AdminController@rejectDepositRequest');
+    
+    Route::get('/adminpanel/acceptwithdraw/{id}', 'AdminController@acceptWithdrawRequest');
+    Route::get('/adminpanel/rejectwithdraw/{id}', 'AdminController@rejectWithdrawRequest');
 });
 
 Route::get('/picture/{filetype}/{filename}', function ($filetype, $filename) {

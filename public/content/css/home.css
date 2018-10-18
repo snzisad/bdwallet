@@ -123,3 +123,8 @@
 .instruction a{
 	color: #E9E59A;
 }
+
+.nav-link {
+	font-weight: bold;
+	font-size: 15px;
+}

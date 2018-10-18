@@ -24,53 +24,53 @@
                             {{ csrf_field() }}
 
                             <div class="exchange_money_info" action="{{ route('getexchangeinfo') }}"></div>
-                            <div id="csrf_exchange_info" data-token='{{ csrf_token() }}'></div>
+                            <div class="csrf_exchange_info" data-token='{{ csrf_token() }}'></div>
 
-                            <input type="hidden" id="minimum_transfer" name="minimum_transfer" >
+                            <input type="hidden" class="minimum_transfer" name="minimum_transfer" >
 
                             <div class="row">
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">
-                                    <img id="from_image" src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
+                                    <img class="from_image" src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label style="font-size: 22px;"><i class="fa fa-arrow-circle-o-up text-primary"></i> From</label>
-                                        <select class="form-control form-control-lg" id="from_id" name="from_id">
+                                        <select class="form-control form-control-lg from_id" id="from_id" name="from_id">
                                             @foreach($all_gateway as $gateway)
                                                 <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" name="send_amount" id="send_amount" class="form-control" required placeholder="Enter Sending Amount" value="{{ $rate->from_rate}}" />
+                                        <input type="number" name="send_amount" id="send_amount" class="form-control send_amount" required placeholder="Enter Sending Amount" value="{{ $rate->from_rate}}" />
                                     </div>
                                     <label class="font-weight-bold text-center" style="font-size: 15px;">Rate: 
-                                        <span id="exchange_rate_from">{{ $rate->from_rate}}</span> 
-                                        <span id="exchange_rate_from_type">{{ $rate->from_rate_type}}</span> = 
-                                        <span id="exchange_rate_to"> {{ $rate->to_rate}}</span> 
-                                        <span id="exchange_rate_to_type">{{ $rate->to_rate_type}}</span></label>
-                                    <input type="hidden" id="exchange_rate" name="rate" value="{{ $rate->from_rate}} {{ $rate->from_rate_type}} = {{ $rate->to_rate}} {{ $rate->to_rate_type}}">
+                                        <span class="exchange_rate_from">{{ $rate->from_rate}}</span> 
+                                        <span class="exchange_rate_from_type">{{ $rate->from_rate_type}}</span> = 
+                                        <span class="exchange_rate_to"> {{ $rate->to_rate}}</span> 
+                                        <span class="exchange_rate_to_type">{{ $rate->to_rate_type}}</span></label>
+                                    <input type="hidden" class="exchange_rate" name="rate" value="{{ $rate->from_rate}} {{ $rate->from_rate_type}} = {{ $rate->to_rate}} {{ $rate->to_rate_type}}">
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label style="font-size: 22px;"><i class="fa fa-arrow-circle-o-down text-primary"></i> To</label>
 
-                                        <select class="form-control form-control-lg" id="to_id" name="to_id">
+                                        <select class="form-control form-control-lg to_id" id="to_id" name="to_id">
                                             @foreach($all_gateway as $gateway)
                                                 <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" name="receive_amount" class="form-control" id="receive_amount" placeholder="Received Amount" value="{{ $rate->to_rate}}" readonly/>
+                                        <input type="number" name="receive_amount" class="form-control receive_amount" id="receive_amount" placeholder="Received Amount" value="{{ $rate->to_rate}}" readonly/>
                                     </div>
-                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span id="reserve_amount">{{ $all_gateway[0]->reserve}}</span> <span id="reserve_amount_type">{{$all_gateway[0]->type}}</span></label>
+                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span class="reserve_amount">{{ $all_gateway[0]->reserve}}</span> <span class="reserve_amount_type">{{$all_gateway[0]->type}}</span></label>
                                 </div>
 
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">
-                                    <img id="to_image"  src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
+                                    <img class="to_image"  src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
                                 </div>
                             </div>
 
@@ -87,17 +87,17 @@
                     <div class="panel-heading">Reviews</div>
 
                     <div class="panel-body">
-                        <div class="testimonials">
-                            <h5 class="author">Kabir Ahmed</h5>
-                            <span class="status text-light bg-success"><i class="fa fa-smile-o"></i> Positive</span>
-                            <p class="text">Very good site</p>
-                        </div>
-
-                        <div class="testimonials">
-                            <h5 class="author">Arifur Rahman</h5>
-                            <span class="status text-light bg-danger"><i class="fa fa-frown-o"></i> Negative</span>
-                            <p class="text">Service is low</p>
-                        </div>
+                        @foreach($reviews as $review)
+                            <div class="testimonials">
+                                <h5 class="author"> {{ $review->user->name }}</h5>
+                                @if($review->status == "positive")
+                                    <span class="status text-light bg-success"><i class="fa fa-smile-o"></i> Positive</span>
+                                @else
+                                    <span class="status text-light bg-danger"><i class="fa fa-frown-o"></i> Negative</span>
+                                @endif
+                                <p class="text"> {{ $review->comment }}</p>
+                            </div>
+                        @endforeach
 
                         <div class="text-right"><a href="{{asset('reviews')}}" class="btn btn-primary btn-sm">See All Reviews <i class="fa fa-arrow-right"></i></a></div>
                     </div>
@@ -119,9 +119,9 @@
                           <tbody>
                             @foreach($exchange_history as $history)
                                 <tr>
-                                  <td><img src="{{ asset('/picture/icon/'.$history->icon)}}"> {{ $history->from_id }}</td>
-                                  <td>{{ $history->to_id }}</td>
-                                  <td>{{ $history->send_amount }} {{ $history->type }}</td>
+                                  <td><img src="{{ asset('/picture/icon/'.$history->send_from_data->icon)}}"> {{ $history->send_from_data->name }}</td>
+                                  <td><img src="{{ asset('/picture/icon/'.$history->send_to_data->icon)}}"> {{ $history->send_to_data->name }}</td>
+                                  <td>{{ $history->send_amount }} {{ $history->send_to_data->currency->type }}</td>
                                   <td>
                                     @if($history->status == "Processing")
                                       <span class="status text-light bg-primary"><i class="fa fa-clock-o"></i> Processing</span>
@@ -130,7 +130,7 @@
                                      @else
                                       <span class="status text-light bg-danger"><i class="fa fa-close"></i> Failed</span>
                                      @endif
-                                    </td>
+                                  </td>
                                 </tr>
                             @endforeach
                           </tbody>
@@ -173,7 +173,7 @@
                             <img class="p-2" src="{{asset('picture/icon/'.$gateway->icon)}}">
                             <div class="mr-auto">
                                 <h5>{{$gateway->name}}</h5>
-                                <span>{{$gateway->reserve}} {{$gateway->type}}</span>
+                                <span>{{$gateway->reserve}} {{$gateway->currency->type}}</span>
                             </div>
                         </div>
                         @endforeach
