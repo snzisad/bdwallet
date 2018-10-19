@@ -55,19 +55,19 @@ class ExchangeController extends Controller
 			"receive_amount" => "required",
 		]);
 
-
 		$exchange_id = str_random(5).date("ymdHis");
 
-		$send_from = Gateway::where('name', $request->from_id)->first();
-		$send_to = Gateway::where('name', $request->to_id)->first();
+		$send_from = Gateway::where('id', $request->from_id)->first();
+		$send_to = Gateway::where('id', $request->to_id)->first();
 
 		return view('exchange/confirmOrder')->with(compact("request", "send_from",'send_to',"exchange_id"));
 	}
 
 	public function confirmExchangeRequest(Request $request){
+
 		$this->validate($request,[
-			"from_id" => "required",
-			"to_id" => "required",
+			"from_id" => "required|integer",
+			"to_id" => "required|integer",
 			"send_amount" => "required",
 			"receive_amount" => "required",
 			"user_phone" => "required",
@@ -77,12 +77,13 @@ class ExchangeController extends Controller
 			"rate" => "required",
 		]);
 
+
 		ExchangeHistory::create($request->all());
 
 		//change the reserve
-		$to_gateway = Gateway::where('name', $request->to_id)->first();
+		$to_gateway = Gateway::where('id', $request->to_id)->first();
 		$curr_amount = $to_gateway->reserve-$request->receive_amount;
-		Gateway::where('name', $request->to_id)->update([
+		Gateway::where('id', $request->to_id)->update([
 			"reserve" => $curr_amount
 		]);
 

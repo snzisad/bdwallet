@@ -14,7 +14,7 @@ class WalletController extends Controller
 {
     public function index(){
         $all_gateway = Gateway::orderBy('name', 'asc')->get();
-        $rate = ExchangeRate::where('from_id', $all_gateway[0]->name)->where('to_id', $all_gateway[0]->name)->first();
+        $rate = ExchangeRate::where('from_id', $all_gateway[0]->id)->where('to_id', $all_gateway[0]->id)->first();
 
         return view("userWallet")->with(compact("all_gateway", "rate"));
     }   
@@ -22,8 +22,8 @@ class WalletController extends Controller
     public function getWalletInfo(Request $request){
 
         $this->validate($request, [
-            "from" => "required",
-            "to" => "required",
+            "from" => "required|integer",
+            "to" => "required|integer",
             "user_id" => "required",
             "_token" => "required"
         ]);
@@ -33,8 +33,8 @@ class WalletController extends Controller
         $to = $request->to;
         $user_id = $request->user_id;
 
-        $from_data = Gateway::where('name', $from)->first();
-        $to_data = Gateway::where('name', $to)->first();
+        $from_data = Gateway::where('id', $from)->first();
+        $to_data = Gateway::where('id', $to)->first();
 
         $wallet = Wallet::where("user_id", $user_id)->where("wallet_id", $from)->first();
 
@@ -57,8 +57,8 @@ class WalletController extends Controller
     public function walletexchange(Request $request){
         $this->validate($request, [
             'user_id' => "required|integer",
-            'from_id' => "required|string",
-            'to_id' => "required|string",
+            'from_id' => "required|integer",
+            'to_id' => "required|integer",
             'send_amount' => "required|string",
             'receive_amount' => "required|string",
             'rate' => "required|string",
@@ -107,7 +107,7 @@ class WalletController extends Controller
     public function walletDeposit(Request $request){
         $this->validate($request, [
             'user_id' => "required|integer",
-            'wallet_id' => "required|string",
+            'wallet_id' => "required|integer",
             'amount' => "required|string",
             'transaction_id' => "required|string"
         ]);
@@ -121,8 +121,8 @@ class WalletController extends Controller
     public function walletWithdraw(Request $request){
         $this->validate($request, [
             'user_id' => "required|integer",
-            'from_id' => "required|string",
-            'to_id' => "required|string",
+            'from_id' => "required|integer",
+            'to_id' => "required|integer",
             'rate' => "required|string",
             'send_amount' => "required|string",
             'receive_amount' => "required|string",
@@ -158,10 +158,9 @@ class WalletController extends Controller
         $user_id = $request->user_id;
 
         $wallet = Wallet::where("user_id", $user_id)->where("wallet_id", $wallet_id)->first();
-        $gateway = Gateway::where("name", $wallet_id)->first();
 
         if ($wallet != null) {
-            $balance = $wallet["balance"] . " " . $gateway["currency"]["type"];
+            $balance = $wallet["balance"] . " " . $wallet->wallet["currency"]["type"];
         } else {
             $balance = 0;
         }

@@ -31,16 +31,16 @@
 
                         <tr>
                               <td style="text-align: center;"> 
-                                {{ $request->from_id }}
+                                {{ $request->send_from_data['name'] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $request->to_id }}
+                                {{ $request->send_to_data['name'] }}
                               </td>
                               <td style="text-align: center;"> 
-                                {{ $request->send_amount }}
+                                {{ $request->send_amount }} {{ $request->send_from_data['currency']['type'] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $request->receive_amount }}
+                                {{ $request->receive_amount }} {{ $request->send_to_data['currency']['type'] }}
                               </td>
                               <td style="text-align: center;"> 
                                 {{ $request->rate }}

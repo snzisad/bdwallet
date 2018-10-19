@@ -96,8 +96,8 @@
 
                           <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                           <input type="hidden" name="exchange_id" value="{{ $exchange_id }}">
-                          <input type="hidden" name="from_id" value="{{ $send_from->name }}">
-                          <input type="hidden" name="to_id" value="{{ $send_to->name }}">
+                          <input type="hidden" name="from_id" value="{{ $send_from->id }}">
+                          <input type="hidden" name="to_id" value="{{ $send_to->id }}">
                           <input type="hidden" name="send_amount" value="{{ $request->send_amount }}">
                           <input type="hidden" name="receive_amount" value="{{ $request->receive_amount }}">
                           <input type="hidden" name="status" value="Processing">

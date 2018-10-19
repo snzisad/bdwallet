@@ -32,9 +32,9 @@ class AdminController extends Controller
         $exchange_info = ExchangeHistory::where('exchange_id', $id)->first();
 
         //change the reserve
-        $gateway = Gateway::where('name', $exchange_info->to_id)->first();
+        $gateway = Gateway::where('id', $exchange_info->to_id)->first();
         $curr_amount = $gateway->reserve + $exchange_info->receive_amount;
-        Gateway::where('name', $exchange_info->to_id)->update([
+        Gateway::where('id', $exchange_info->to_id)->update([
             "reserve" => $curr_amount
         ]);
 
@@ -63,7 +63,7 @@ class AdminController extends Controller
             }
             
             // chenge the reserve
-            $gateway = Gateway::where("name", $deposit->wallet_id)->first();
+            $gateway = Gateway::where("id", $deposit->wallet_id)->first();
             $curr_reserve = $gateway->reserve + $deposit->amount;
             $gateway->reserve = $curr_reserve;
             $gateway->save();
@@ -104,7 +104,7 @@ class AdminController extends Controller
                 $wallet->save();
 
                 // cheng the reserve
-                $gateway = Gateway::where("name", $withdraw->to_id)->first();
+                $gateway = Gateway::where("id", $withdraw->to_id)->first();
                 $curr_reserve = $gateway->reserve - $withdraw->receive_amount;
                 $gateway->reserve = $curr_reserve;
                 $gateway->save();

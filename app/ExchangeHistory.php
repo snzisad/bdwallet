@@ -12,9 +12,9 @@ class ExchangeHistory extends Model
     protected $with = ['send_from_data', 'send_to_data'];
 
     public function send_from_data(){
-        return $this->hasOne(Gateway::class, "name", "from_id");
+        return $this->hasOne(Gateway::class, "id", "from_id");
     }
     public function send_to_data(){
-        return $this->hasOne(Gateway::class, "name", "to_id");
+        return $this->hasOne(Gateway::class, "id", "to_id");
     }
 }

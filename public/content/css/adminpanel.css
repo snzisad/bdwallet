@@ -18,3 +18,7 @@
 .panel .panel_content{
   padding: 20px;
 }
+
+table tbody tr > td {
+  border: 1px solid #ddd;
+}

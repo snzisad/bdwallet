@@ -31,8 +31,8 @@ class HomeController extends Controller
     public function index()
     {
         $all_gateway = Gateway::orderBy('name','asc')->get();
-        $rate = ExchangeRate::where('from_id', $all_gateway[0]->name)->where('to_id', $all_gateway[0]->name)->first();
-        $exchange_history = ExchangeHistory::orderBy('exchange_history.id','desc')->get();
+        $rate = ExchangeRate::where('from_id', $all_gateway[0]->id)->where('to_id', $all_gateway[0]->id)->first();
+        $exchange_history = ExchangeHistory::orderBy('exchange_history.id','desc')->take(10)->get();
         $news = News::first();
         $reviews = Reviews::orderBy('id', "desc")->take(10)->get();
 
@@ -41,15 +41,15 @@ class HomeController extends Controller
 
     public function getExchangeInfo(Request $request){
         $this->validate($request, [
-            "from" => "required",
-            "to" => "required",
+            "from" => "required|integer",
+            "to" => "required|integer",
             "_token" => "required"
         ]);
         $from = $request->from;
         $to = $request->to;
 
-        $from_data = Gateway::where('name', $from)->first();
-        $to_data = Gateway::where('name', $to)->first();
+        $from_data = Gateway::where('id', $from)->first();
+        $to_data = Gateway::where('id', $to)->first();
         $rate = ExchangeRate::where('from_id', $from)->where('to_id', $to)->first();
 
 

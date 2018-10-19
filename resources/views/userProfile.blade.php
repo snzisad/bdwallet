@@ -42,7 +42,7 @@
                                             <td>{{ $history->send_from_data->name }}</td>
                                             <td>{{ $history->send_to_data->name }}</td>
                                             <td>{{ $history->receive_amount }} {{ $history->send_to_data->currency->type }}</td>
-                                            <td>{{ $history->exchange_id }}</td>
+                                            <td> <a href="{{asset('/track/0/'.$history->exchange_id)}}">{{ $history->exchange_id }}</a></td>
                                             <td>{{ $history->created_at }}</td>
                                             <td>
                                                 @if($history->status == "Processing")
@@ -72,7 +72,6 @@
                                             <input type="radio" name="status" id="negative" value="negative"/>
                                             <label for="negative">Negative</label>
                                         </div>
-                                        
                                     </div>
                                     
                                     <div class="form-group">

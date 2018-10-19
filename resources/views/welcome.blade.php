@@ -26,7 +26,7 @@
                             <div class="exchange_money_info" action="{{ route('getexchangeinfo') }}"></div>
                             <div class="csrf_exchange_info" data-token='{{ csrf_token() }}'></div>
 
-                            <input type="hidden" class="minimum_transfer" name="minimum_transfer" >
+                            <input type="hidden" class="minimum_transfer">
 
                             <div class="row">
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">
@@ -38,7 +38,7 @@
                                         <label style="font-size: 22px;"><i class="fa fa-arrow-circle-o-up text-primary"></i> From</label>
                                         <select class="form-control form-control-lg from_id" id="from_id" name="from_id">
                                             @foreach($all_gateway as $gateway)
-                                                <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
+                                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -47,10 +47,11 @@
                                     </div>
                                     <label class="font-weight-bold text-center" style="font-size: 15px;">Rate: 
                                         <span class="exchange_rate_from">{{ $rate->from_rate}}</span> 
-                                        <span class="exchange_rate_from_type">{{ $rate->from_rate_type}}</span> = 
+                                        <span class="exchange_rate_from_type">{{ $rate->from_gateway["currency"]["type"]}}</span> = 
                                         <span class="exchange_rate_to"> {{ $rate->to_rate}}</span> 
-                                        <span class="exchange_rate_to_type">{{ $rate->to_rate_type}}</span></label>
-                                    <input type="hidden" class="exchange_rate" name="rate" value="{{ $rate->from_rate}} {{ $rate->from_rate_type}} = {{ $rate->to_rate}} {{ $rate->to_rate_type}}">
+                                        <span class="exchange_rate_to_type">{{ $rate->to_gateway["currency"]["type"]}}</span>
+                                    </label>
+                                    <input type="hidden" class="exchange_rate" name="rate" value="{{ $rate->from_rate}} {{ $rate->from_gateway['currency']['type'] }} = {{ $rate->to_rate}} {{ $rate->to_gateway['currency']['type']}}">
                                 </div>
 
                                 <div class="col-md-4">
@@ -59,14 +60,14 @@
 
                                         <select class="form-control form-control-lg to_id" id="to_id" name="to_id">
                                             @foreach($all_gateway as $gateway)
-                                                <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
+                                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <input type="number" name="receive_amount" class="form-control receive_amount" id="receive_amount" placeholder="Received Amount" value="{{ $rate->to_rate}}" readonly/>
                                     </div>
-                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span class="reserve_amount">{{ $all_gateway[0]->reserve}}</span> <span class="reserve_amount_type">{{$all_gateway[0]->type}}</span></label>
+                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span class="reserve_amount">{{ $all_gateway[0]->reserve}}</span> <span class="reserve_amount_type">{{$all_gateway[0]->currency['type']}}</span></label>
                                 </div>
 
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">

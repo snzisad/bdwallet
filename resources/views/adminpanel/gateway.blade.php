@@ -98,7 +98,7 @@
                               </td>
                               <td  style="vertical-align: middle;">
                                 <input type="submit" class="btn btn-primary btn-sm" value="Save">                                
-                                <a href="{{asset('/adminpanel/gateway/remove/'.$gateway->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                                <!-- <a href="{{asset('/adminpanel/gateway/remove/'.$gateway->id)}}" class="btn btn-danger btn-sm">Delete</a> -->
                               </td>
 
                             </form>

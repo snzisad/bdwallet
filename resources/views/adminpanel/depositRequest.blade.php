@@ -29,7 +29,7 @@
                                 {{ $request->user["name"] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $request->wallet_id }}
+                                {{ $request->wallet['name'] }}
                               </td>
                               <td style="text-align: center;"> 
                                 {{ $request->amount }} {{ $request->wallet['currency']['type'] }}

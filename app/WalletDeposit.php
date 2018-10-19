@@ -12,7 +12,7 @@ class WalletDeposit extends Model
 
     public function wallet()
     {
-        return $this->hasOne(Gateway::class, "name", "wallet_id");
+        return $this->hasOne(Gateway::class, "id", "wallet_id");
     }
 
     public function user()

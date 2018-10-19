@@ -12,12 +12,12 @@ class WalletWithdraw extends Model
 
     public function sent_wallet()
     {
-        return $this->hasOne(Gateway::class, "name", "from_id");
+        return $this->hasOne(Gateway::class, "id", "from_id");
     }
 
     public function receive_wallet()
     {
-        return $this->hasOne(Gateway::class, "name", "to_id");
+        return $this->hasOne(Gateway::class, "id", "to_id");
     }
 
     public function user()

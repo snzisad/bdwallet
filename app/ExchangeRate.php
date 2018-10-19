@@ -7,10 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class ExchangeRate extends Model
 {
     protected $table = 'exchange_rate';
-
     protected $guarded = ['_token'];
+    protected $with = ["from_gateway", "to_gateway"];
 
-    // public function scopeFromGateWayName($query){
-    // 	return $query->join('gateway','exchange_rate.from_id','gateway.id')->select('gateway.name as from_gateway_name');
-    // }
+    public function from_gateway(){
+        return $this->hasOne(Gateway::class, "id", "from_id");
+    }
+
+    public function to_gateway(){
+        return $this->hasOne(Gateway::class, "id", "to_id");
+    }
 }

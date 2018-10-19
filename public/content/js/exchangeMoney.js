@@ -70,18 +70,19 @@ window.onload = function begin()
 		        "_token": $csrf
 		      },
 		      success: function(data){
-				  $('.from_image').attr('src', '/picture/icon/'+data.from_data.icon);
+				  console.log(data.rate.from_gateway.currency.type);
+				  	$('.from_image').attr('src', '/picture/icon/'+data.from_data.icon);
 			      	$('.to_image').attr('src', '/picture/icon/'+data.to_data.icon);
 			      	$('.reserve_amount').text(data.to_data.reserve);
-				  $('.reserve_amount_type').text(data.to_data.currency.type);
+				  	$('.reserve_amount_type').text(data.to_data.currency.type);
 			      	$(".send_amount").val(data.rate.from_rate);
 					$('.receive_amount').val(data.rate.to_rate);
-					$('.exchange_rate_from').text(data.rate.from_rate);
-					$('.exchange_rate_from_type').text(data.rate.from_rate_type);
+				 	$('.exchange_rate_from').text(data.rate.from_rate);
+				  	$('.exchange_rate_from_type').text(data.rate.from_gateway.currency.type);
 					$('.exchange_rate_to').text(data.rate.to_rate);
-					$('.exchange_rate_to_type').text(data.rate.to_rate_type);
+				  	$('.exchange_rate_to_type').text(data.rate.to_gateway.currency.type);
 					$('.minimum_transfer').text(data.rate.minimum_transfer);
-					$('.exchange_rate').text(data.rate.from_rate+" "+data.rate.from_rate_type+" = "+data.rate.to_rate+" "+data.rate.to_rate_type);
+				  	$('.exchange_rate').val(data.rate.from_rate + " " + data.rate.from_gateway.currency.type + " = " + data.rate.to_rate + " " + data.rate.to_gateway.currency.type);
 				},
 		      error: function(data){
 		        alert('Something went wrong. Please try again');

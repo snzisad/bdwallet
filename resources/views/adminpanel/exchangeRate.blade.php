@@ -18,7 +18,7 @@
                         <h5>From</h5>
                          <select class="form-control" name="from_id" required>
                             @foreach($all_gateway as $gateway)
-                                <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
+                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -26,7 +26,7 @@
                         <h5>To</h5>
                         <select class="form-control" name="to_id" required>
                             @foreach($all_gateway as $gateway)
-                                <option value="{{ $gateway->name }}">{{ $gateway->name }}</option>
+                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -39,7 +39,7 @@
                             <div class="col-md-2">
                                 <select class="form-control" name="from_rate_type" required>
                                     @foreach($balance_type as $type)
-                                        <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                        <option value="{{ $type->id }}">{{ $type->type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -50,7 +50,7 @@
                             <div class="col-md-2">
                                 <select class="form-control" name="to_rate_type" required>
                                     @foreach($balance_type as $type)
-                                        <option value="{{ $type->type }}">{{ $type->type }}</option>
+                                        <option value="{{ $type->id }}">{{ $type->type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -85,16 +85,16 @@
                     @foreach($rates as $rate)
                         <tr>
                               <td style="text-align: center;"> 
-                                {{ $rate->from_id }}
+                                {{ $rate->from_gateway["name"] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $rate->to_id }}
+                                {{ $rate->to_gateway["name"]  }}
                               </td>
                               <td  style="text-align: center;">
-                                 {{ $rate->from_rate }} {{ $rate->from_rate_type }} = {{ $rate->to_rate }} {{ $rate->to_rate_type }}
+                                 {{ $rate->from_rate }} {{ $rate->from_gateway["currency"]["type"] }} = {{ $rate->to_rate }} {{ $rate->to_gateway["currency"]["type"] }}
                               </td>
                               <td  style="text-align: center;">
-                                 {{ $rate->minimum_transfer }} {{ $rate->to_rate_type }}
+                                 {{ $rate->minimum_transfer }} {{ $rate->from_gateway["currency"]["type"] }}
                               </td>
                         </tr>
                     @endforeach

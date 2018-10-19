@@ -73,10 +73,10 @@ $('.wallet_id').on('change', function (e) {
 				  $('.wallet_balance').text(data.balance);
 				  $('.wallet_balance_type').text(data.from_data.currency.type);
 				  $('.wallet_exchange_rate_from').text(data.rate.from_rate);
-				  $('.wallet_exchange_rate_from_type').text(data.rate.from_rate_type);
+				  $('.wallet_exchange_rate_from_type').text(data.rate.from_gateway.currency.type);
 				  $('.wallet_exchange_rate_to').text(data.rate.to_rate);
-				  $('.wallet_exchange_rate_to_type').text(data.rate.to_rate_type);
-				  $('.wallet_exchange_rate').val(data.rate.from_rate+" "+data.rate.from_rate_type+" = "+data.rate.to_rate+" "+data.rate.to_rate_type);
+				  $('.wallet_exchange_rate_to_type').text(data.rate.to_gateway.currency.type);
+				  $('.wallet_exchange_rate').val(data.rate.from_rate + " " + data.rate.from_gateway.currency.type + " = " + data.rate.to_rate + " " + data.rate.to_gateway.currency.type);
 				},
 		      error: function(data){
 		        alert('Something went wrong. Please try again');

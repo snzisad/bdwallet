@@ -32,10 +32,10 @@
                                 {{ $request->user['name'] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $request->from_id }}
+                                {{ $request->sent_wallet['name'] }}
                               </td>
                               <td  style="text-align: center;">
-                                {{ $request->to_id }}
+                                {{ $request->receive_wallet['name']}}
                               </td>
                               <td  style="text-align: center;">
                                 {{ $request->rate }}
