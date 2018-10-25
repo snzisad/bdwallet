@@ -39,6 +39,7 @@
 					<div class="col">
 						<div class="header_content d-flex flex-row align-items-center justify-content-start">
 							<div class="logo_container">
+								<img src="{{asset('/logo.png')}}" hight="30px" width="45px" alt="logo"/>
 								<a href="{{asset('/')}}">
 									<div class="logo_text">BD<span>W</span>allet</div>
 								</a>
@@ -66,6 +67,10 @@
 												{{ csrf_field() }}
 											</form>
 										</li>
+									@endif
+									
+									@if(isset($admin_status->status))
+										<li><font color="#14C906" size="4px"><b>Online</b></font></li>
 									@endif
 									
 								</ul>
@@ -101,11 +106,11 @@
 		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
 		<nav class="menu_nav">
 			<ul class="menu_mm">
-				
+			
 				<li><a href="{{asset('#')}}'">Exchange</a></li>
-				<li><a href="{{asset('#')}}'">Testimonials</a></li>
+				<li><a href="{{asset('/reviews')}}'">Reviews</a></li>
 				<li><a href="{{asset('#')}}'">Affiliate</a></li>
-				<li><a href="{{asset('#')}}'">Contact</a></li>
+				<li><a href="{{asset('/contact')}}'">Contact</a></li>
 				@if (Auth::guest())
 					<li><a href="{{ route('login') }}">Login</a></li>
 					<li><a href="{{ route('register') }}">Register</a></li>
@@ -127,7 +132,6 @@
 			</ul>
 		</nav>
 	</div>
-
 	<div class="super_container">
 		@yield('content')
 	</div>
@@ -135,7 +139,13 @@
 	<!-- Footer -->
 	<footer class="footer">
 		<div class="container">
-			<div class="row copyright_row">
+			<font color="#C6C906" size="4px" style="margin-right: 10px;"><i>We Accept: </i></font>
+
+			@foreach($all_gateway as $gateway)
+				<img src="{{asset('/picture/icon/'.$gateway->icon)}}" height="45px" width="75px"/>
+			@endforeach
+
+			<div class="row copyright_row" style="margin-top: 10px;">
 				<div class="col">
 					<div class="copyright d-flex flex-lg-row flex-column align-items-center justify-content-start">
 						<div class="cr_text">Developed By: <a href="https://banglasofttech.com">Bangla Soft Tech</a></div>
@@ -145,6 +155,7 @@
 								<li><a href="#">Terms of Use</a></li>
 								<li><a href="#">Privacy Policy</a></li>
 								<li><a href="#">About</a></li>
+								<li><a href="https://www.facebook.com/dmsalam">Order <img src="{{asset('content/payoneer2.png')}}" height="100px" width="75px"/> card on your name by 500 taka</a></li>
 							</ul>
 						</div>
 					</div>

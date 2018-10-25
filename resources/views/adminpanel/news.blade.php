@@ -1,6 +1,6 @@
 @extends("layouts.adminPanelLayout")
 
-@section('title', "News")
+@section('title', "News and Notice")
 
 @section('content')
 
@@ -10,7 +10,12 @@
 			<div class="row">
 				<div class="col-lg-8">
 					<div class="form-group">
-			            <TEXTAREA name="text" class="form-control" placeholder="Enter News" required autofocus style="height: 150px; width: 400px;">{{ $news->text }}</TEXTAREA>
+						<label>News</label>
+			            <TEXTAREA name="text" class="form-control" placeholder="Enter News" required autofocus style="height: 100px; width: 400px;">{{ $news->text }}</TEXTAREA>
+			        </div>
+					<div class="form-group">
+						<label>Notice</label>
+			            <input type="text" name="notice" class="form-control" placeholder="Enter Notice" required autofocus style="width: 400px;" value="{{ $notice->text }}">
 			        </div>
 				</div>
 			</div>

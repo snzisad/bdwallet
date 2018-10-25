@@ -99,7 +99,7 @@
 
                         <li> <a class="email-compose.html" href="{{asset('/')}}"><i class="fa fa-home"></i>Home</a>
 
-                        <li> <a class="email-compose.html" href="{{asset('/adminpanel/news')}}"><i class="fa fa-info-circle"></i>News</a>
+                        <li> <a class="email-compose.html" href="{{asset('/adminpanel/news')}}"><i class="fa fa-info-circle"></i>News and Notice</a>
 
                         <li> <a class="email-compose.html" href="{{asset('/adminpanel/exchangerequest')}}"><i class="fa fa-exchange"></i>Exchange Request</a>
                         </li>

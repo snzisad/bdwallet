@@ -33,10 +33,11 @@ class HomeController extends Controller
         $all_gateway = Gateway::orderBy('name','asc')->get();
         $rate = ExchangeRate::where('from_id', $all_gateway[0]->id)->where('to_id', $all_gateway[0]->id)->first();
         $exchange_history = ExchangeHistory::orderBy('exchange_history.id','desc')->take(10)->get();
-        $news = News::first();
+        $news = News::where("id", "1")->first();
+        $notice = News::where("id","2")->first();
         $reviews = Reviews::orderBy('id', "desc")->take(10)->get();
 
-        return view('welcome')->with(compact("all_gateway","rate","exchange_history","news", "reviews"));
+        return view('welcome')->with(compact("all_gateway","rate","exchange_history","news", "reviews","notice"));
     }
 
     public function getExchangeInfo(Request $request){

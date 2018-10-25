@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2018 at 09:20 AM
+-- Generation Time: Oct 26, 2018 at 01:19 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -185,7 +185,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2018_10_17_211118_wallet_deposit', 4),
 (11, '2018_10_17_211140_wallet_withdraw', 4),
 (12, '2018_10_18_085353_wallet', 5),
-(13, '2018_10_18_171353_message', 6);
+(13, '2018_10_18_171353_message', 6),
+(14, '2018_10_25_214137_online_status', 7);
 
 -- --------------------------------------------------------
 
@@ -205,7 +206,29 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `text`, `created_at`, `updated_at`) VALUES
-(1, 'Hello this is first news. How are you all', '2018-10-06 13:56:33', '2018-10-06 14:02:42');
+(1, 'Hello this is first news. How are you', '2018-10-06 13:56:33', '2018-10-25 15:36:17'),
+(2, 'This is track exchange notice', '2018-10-06 13:56:33', '2018-10-25 15:36:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `online_status`
+--
+
+CREATE TABLE `online_status` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `online_status`
+--
+
+INSERT INTO `online_status` (`id`, `user_id`, `status`, `created_at`, `updated_at`) VALUES
+(6, 1, 1, '2018-10-25 16:07:50', '2018-10-25 16:07:50');
 
 -- --------------------------------------------------------
 
@@ -264,8 +287,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `type`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Sahrif Noor Zisad', 'snzisad@gmail.com', 1, '$2y$10$RLQrgyq5.XQlnGagDo4BqOe729UzRa9Cr0zTVejQ0b/5YSThWAxuS', '039QosgNpHx1nOhO0XD8eCCjetVFAugtDrBOb9WTOfAmOMDPmQjmlOFqVf5Z', '2018-10-08 01:51:35', '2018-10-08 01:51:35'),
-(2, 'Bangla Soft Tech', 'snzisad2@gmail.com', 0, '$2y$10$zkvcrbPz.TK7kZRrVgCWb.r.xChDRc1huyCds4x3ra02ex4LwTnHe', 'RR5O8UDbKnmogrSpvta3EITX2pnLqVWJpeLkXzec0PGJwEBc9StaLm7nxVcb', '2018-10-08 15:16:04', '2018-10-17 16:35:41');
+(1, 'Sahrif Noor Zisad', 'snzisad@gmail.com', 1, '$2y$10$RLQrgyq5.XQlnGagDo4BqOe729UzRa9Cr0zTVejQ0b/5YSThWAxuS', '2dHj0WfdsZ5YZG1MFQBhpcU6O1ECB6q3xjsafwBdlQcUY0nr5sv974IrnGWh', '2018-10-08 01:51:35', '2018-10-08 01:51:35'),
+(2, 'Bangla Soft Tech', 'snzisad2@gmail.com', 0, '$2y$10$zkvcrbPz.TK7kZRrVgCWb.r.xChDRc1huyCds4x3ra02ex4LwTnHe', 'zlSqBkgN95LUAdfz8Sn5MZva9QFWSVW1vBxA2RN52sYokehUWMqp4Jfz1rCm', '2018-10-08 15:16:04', '2018-10-17 16:35:41');
 
 -- --------------------------------------------------------
 
@@ -418,6 +441,12 @@ ALTER TABLE `news`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `online_status`
+--
+ALTER TABLE `online_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `reviews`
 --
 ALTER TABLE `reviews`
@@ -493,13 +522,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `online_status`
+--
+ALTER TABLE `online_status`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reviews`

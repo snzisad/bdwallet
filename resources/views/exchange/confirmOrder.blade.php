@@ -41,7 +41,7 @@
                           </div>
 
                           <div class="form-group row">
-                            <label for="account" class="col-sm-6 col-form-label">Your Account</label>
+                            <label for="account" class="col-sm-6 col-form-label">Your {{ $send_to->name }} Account</label>
                             <div class="col-sm-6">
                               <input type="text" name="user_account" class="user_account form-control" id="account" placeholder="Enter your account" required autofocus>
                             </div>
@@ -83,7 +83,7 @@
                               <div class="p-2 phone_number"></div>
                           </div>
                           <div class="d-flex">
-                              <div class="mr-auto p-2">Our Merchant Account: </div>
+                              <div class="mr-auto p-2">Our {{ $send_from->name }} Merchant Account: </div>
                               <div class="p-2">{{ $send_from->account }}</div>
                           </div>
 

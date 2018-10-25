@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\OnlineStatus;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -19,7 +22,20 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    // use AuthenticatesUsers;
+    use AuthenticatesUsers {
+        logout as performLogout;
+    }
+
+    public function logout(Request $request)
+    {
+        if (Auth::user()->type == "1") {
+            OnlineStatus::where('user_id', Auth::user()->id)->delete();
+        }
+
+        $this->performLogout($request);
+        return redirect("/");
+    }
 
     /**
      * Where to redirect users after login.
@@ -30,6 +46,11 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if(Auth::user()->type=="1"){
+            OnlineStatus::create([
+                "user_id"=> Auth::user()->id,
+                "status"=> 1
+            ]);
+            
             return "adminpanel";
         }
         else{

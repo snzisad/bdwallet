@@ -46,12 +46,12 @@
                                         <input type="number" name="send_amount" id="send_amount" class="form-control send_amount" required placeholder="Enter Sending Amount" value="{{ $rate->from_rate}}" />
                                     </div>
                                     <label class="font-weight-bold text-center" style="font-size: 15px;">Rate: 
-                                        <span class="exchange_rate_from">{{ $rate->from_rate}}</span> 
+                                        <span class="exchange_rate_from">1</span> 
                                         <span class="exchange_rate_from_type">{{ $rate->from_gateway["currency"]["type"]}}</span> = 
-                                        <span class="exchange_rate_to"> {{ $rate->to_rate}}</span> 
+                                        <span class="exchange_rate_to"> 0.90</span> 
                                         <span class="exchange_rate_to_type">{{ $rate->to_gateway["currency"]["type"]}}</span>
                                     </label>
-                                    <input type="hidden" class="exchange_rate" name="rate" value="{{ $rate->from_rate}} {{ $rate->from_gateway['currency']['type'] }} = {{ $rate->to_rate}} {{ $rate->to_gateway['currency']['type']}}">
+                                    <input type="hidden" class="exchange_rate" name="rate" value="1 {{ $rate->from_gateway['currency']['type'] }} = 0.90 {{ $rate->to_gateway['currency']['type']}}">
                                 </div>
 
                                 <div class="col-md-4">
@@ -122,7 +122,7 @@
                                 <tr>
                                   <td><img src="{{ asset('/picture/icon/'.$history->send_from_data['icon'])}}"> {{ $history->send_from_data['name'] }}</td>
                                   <td><img src="{{ asset('/picture/icon/'.$history->send_to_data['icon'])}}"> {{ $history->send_to_data['name'] }}</td>
-                                  <td>{{ $history->send_amount }} {{ $history->send_to_data['currency']['type'] }}</td>
+                                  <td>{{ $history->send_amount }} {{ $history->send_from_data['currency']['type'] }}</td>
                                   <td>
                                     @if($history->status == "Processing")
                                       <span class="status text-light bg-primary"><i class="fa fa-clock-o"></i> Processing</span>
@@ -141,6 +141,11 @@
             </div>
 
             <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Notice: <font color="#000" size="3px" style="font-weight: normal">{{ $notice->text }}</font></div>
+
+                </div>
+
                 <div class="panel panel-default">
                     <div class="panel-heading">Track Exchange</div>
 
