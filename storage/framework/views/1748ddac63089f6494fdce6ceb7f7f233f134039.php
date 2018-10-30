@@ -1,13 +1,11 @@
-@extends("layouts.generalLayout")
+<?php $__env->startSection('title', "BD Wallet"); ?>
 
-@section('title', "BD Wallet")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
     <!-- Breaking News -->
     <div class="d-flex text-light"  style="font-size: 18px; margin-left: 15px;">
         <div class="bg-success p-2" style="padding: 8px;">News:</div>
-        <marquee class="bg-primary mr-auto" style="padding: 8px;"> {{ $news->text }}</marquee>
+        <marquee class="bg-primary mr-auto" style="padding: 8px;"> <?php echo e($news->text); ?></marquee>
     </div>
 
     <div class="container" style="margin-top: 20px">
@@ -20,26 +18,27 @@
                         <div class="bg-danger text-light text-center error_panel" style="padding: 5px; font-size: 16px; margin-bottom: 10px; display: none;">
                             <i class="fa fa-close"></i> <span class="error_panel_message"></span>
                         </div>
-                        <form class="exchange-money text-center " method="POST" action="{{ route('sendexchangerequest') }}">
-                            {{ csrf_field() }}
+                        <form class="exchange-money text-center " method="POST" action="<?php echo e(route('sendexchangerequest')); ?>">
+                            <?php echo e(csrf_field()); ?>
 
-                            <div class="exchange_money_info" action="{{ route('getexchangeinfo') }}"></div>
-                            <div class="csrf_exchange_info" data-token='{{ csrf_token() }}'></div>
+
+                            <div class="exchange_money_info" action="<?php echo e(route('getexchangeinfo')); ?>"></div>
+                            <div class="csrf_exchange_info" data-token='<?php echo e(csrf_token()); ?>'></div>
 
                             <input type="hidden" class="minimum_transfer">
 
                             <div class="row">
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">
-                                    <img class="from_image" src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
+                                    <img class="from_image" src = "<?php echo e(asset('/picture/icon/'.$all_gateway[0]->icon)); ?>" />
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label style="font-size: 22px;"><i class="fa fa-arrow-circle-o-up text-primary"></i> From</label>
                                         <select class="form-control form-control-lg from_id" id="from_id" name="from_id">
-                                            @foreach($all_gateway as $gateway)
-                                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
-                                            @endforeach
+                                            <?php $__currentLoopData = $all_gateway; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gateway): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($gateway->id); ?>"><?php echo e($gateway->name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -47,11 +46,11 @@
                                     </div>
                                     <label class="font-weight-bold text-center" style="font-size: 15px;">Rate: 
                                         <span class="exchange_rate_from">1</span> 
-                                        <span class="exchange_rate_from_type">{{ $all_gateway[0]["currency"]["type"]}}</span> = 
+                                        <span class="exchange_rate_from_type"><?php echo e($all_gateway[0]["currency"]["type"]); ?></span> = 
                                         <span class="exchange_rate_to"> 0.90</span> 
-                                        <span class="exchange_rate_to_type">{{ $all_gateway[0]["currency"]["type"]}}</span>
+                                        <span class="exchange_rate_to_type"><?php echo e($all_gateway[0]["currency"]["type"]); ?></span>
                                     </label>
-                                    <input type="hidden" class="exchange_rate" name="rate" value="1 {{ $all_gateway[0]['currency']['type'] }} = 0.90 {{ $all_gateway[0]['currency']['type'] }}">
+                                    <input type="hidden" class="exchange_rate" name="rate" value="1 <?php echo e($all_gateway[0]['currency']['type']); ?> = 0.90 <?php echo e($all_gateway[0]['currency']['type']); ?>">
                                 </div>
 
                                 <div class="col-md-4">
@@ -59,19 +58,19 @@
                                         <label style="font-size: 22px;"><i class="fa fa-arrow-circle-o-down text-primary"></i> To</label>
 
                                         <select class="form-control form-control-lg to_id" id="to_id" name="to_id">
-                                            @foreach($all_gateway as $gateway)
-                                                <option value="{{ $gateway->id }}">{{ $gateway->name }}</option>
-                                            @endforeach
+                                            <?php $__currentLoopData = $all_gateway; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gateway): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <option value="<?php echo e($gateway->id); ?>"><?php echo e($gateway->name); ?></option>
+                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <input type="number" name="receive_amount" class="form-control receive_amount" id="receive_amount" placeholder="Received Amount" value="0.90" readonly/>
                                     </div>
-                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span class="reserve_amount">{{ $all_gateway[0]->reserve}}</span> <span class="reserve_amount_type">{{$all_gateway[0]->currency['type']}}</span></label>
+                                    <label class="font-weight-bold text-center" style="font-size: 15px;">Reserve: <span class="reserve_amount"><?php echo e($all_gateway[0]->reserve); ?></span> <span class="reserve_amount_type"><?php echo e($all_gateway[0]->currency['type']); ?></span></label>
                                 </div>
 
                                 <div class="col-md-2" style="margin-bottom: auto;margin-top: auto;">
-                                    <img class="to_image"  src = "{{asset('/picture/icon/'.$all_gateway[0]->icon)}}" />
+                                    <img class="to_image"  src = "<?php echo e(asset('/picture/icon/'.$all_gateway[0]->icon)); ?>" />
                                 </div>
                             </div>
 
@@ -88,19 +87,19 @@
                     <div class="panel-heading">Reviews</div>
 
                     <div class="panel-body">
-                        @foreach($reviews as $review)
+                        <?php $__currentLoopData = $reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="testimonials">
-                                <h5 class="author"> {{ $review->user->name }}</h5>
-                                @if($review->status == "positive")
+                                <h5 class="author"> <?php echo e($review->user->name); ?></h5>
+                                <?php if($review->status == "positive"): ?>
                                     <span class="status text-light bg-success"><i class="fa fa-smile-o"></i> Positive</span>
-                                @else
+                                <?php else: ?>
                                     <span class="status text-light bg-danger"><i class="fa fa-frown-o"></i> Negative</span>
-                                @endif
-                                <p class="text"> {{ $review->comment }}</p>
+                                <?php endif; ?>
+                                <p class="text"> <?php echo e($review->comment); ?></p>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                        <div class="text-right"><a href="{{asset('reviews')}}" class="btn btn-primary btn-sm">See All Reviews <i class="fa fa-arrow-right"></i></a></div>
+                        <div class="text-right"><a href="<?php echo e(asset('reviews')); ?>" class="btn btn-primary btn-sm">See All Reviews <i class="fa fa-arrow-right"></i></a></div>
                     </div>
                 </div>
 
@@ -118,22 +117,22 @@
                             </tr>
                           </thead>
                           <tbody>
-                            @foreach($exchange_history as $history)
+                            <?php $__currentLoopData = $exchange_history; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $history): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
-                                  <td><img src="{{ asset('/picture/icon/'.$history->send_from_data['icon'])}}"> {{ $history->send_from_data['name'] }}</td>
-                                  <td><img src="{{ asset('/picture/icon/'.$history->send_to_data['icon'])}}"> {{ $history->send_to_data['name'] }}</td>
-                                  <td>{{ $history->send_amount }} {{ $history->send_from_data['currency']['type'] }}</td>
+                                  <td><img src="<?php echo e(asset('/picture/icon/'.$history->send_from_data['icon'])); ?>"> <?php echo e($history->send_from_data['name']); ?></td>
+                                  <td><img src="<?php echo e(asset('/picture/icon/'.$history->send_to_data['icon'])); ?>"> <?php echo e($history->send_to_data['name']); ?></td>
+                                  <td><?php echo e($history->send_amount); ?> <?php echo e($history->send_from_data['currency']['type']); ?></td>
                                   <td>
-                                    @if($history->status == "Processing")
+                                    <?php if($history->status == "Processing"): ?>
                                       <span class="status text-light bg-primary"><i class="fa fa-clock-o"></i> Processing</span>
-                                     @elseif($history->status == "Accepted")
+                                     <?php elseif($history->status == "Accepted"): ?>
                                       <span class="status text-light bg-success"><i class="fa fa-check"></i> Success</span>
-                                     @else
+                                     <?php else: ?>
                                       <span class="status text-light bg-danger"><i class="fa fa-close"></i> Failed</span>
-                                     @endif
+                                     <?php endif; ?>
                                   </td>
                                 </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                           </tbody>
                         </table>
                     </div>
@@ -142,7 +141,7 @@
 
             <div class="col-md-4">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Notice: <font color="#000" size="3px" style="font-weight: normal">{{ $notice->text }}</font></div>
+                    <div class="panel-heading">Notice: <font color="#000" size="3px" style="font-weight: normal"><?php echo e($notice->text); ?></font></div>
 
                 </div>
 
@@ -150,8 +149,9 @@
                     <div class="panel-heading">Track Exchange</div>
 
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('track') }}">
-                            {{ csrf_field() }}
+                        <form class="form-horizontal" method="POST" action="<?php echo e(route('track')); ?>">
+                            <?php echo e(csrf_field()); ?>
+
 
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
@@ -174,15 +174,15 @@
                     <div class="panel-heading">Gateway & Reserve</div>
 
                     <div class="panel-body">
-                        @foreach($all_gateway as $gateway)
+                        <?php $__currentLoopData = $all_gateway; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $gateway): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="reserve d-flex">
-                            <img class="p-2" src="{{asset('picture/icon/'.$gateway->icon)}}">
+                            <img class="p-2" src="<?php echo e(asset('picture/icon/'.$gateway->icon)); ?>">
                             <div class="mr-auto">
-                                <h5>{{$gateway->name}}</h5>
-                                <span>{{$gateway->reserve}} {{$gateway->currency->type}}</span>
+                                <h5><?php echo e($gateway->name); ?></h5>
+                                <span><?php echo e($gateway->reserve); ?> <?php echo e($gateway->currency->type); ?></span>
                             </div>
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         
                     </div>
                 </div>
@@ -190,4 +190,5 @@
         </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.generalLayout", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

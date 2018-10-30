@@ -155,7 +155,7 @@
 								<li><a href="#">Terms of Use</a></li>
 								<li><a href="#">Privacy Policy</a></li>
 								<li><a href="#">About</a></li>
-								<li><a href="https://www.facebook.com/dmsalam">Order <img src="{{asset('content/payoneer2.png')}}" height="100px" width="75px"/> card on your name by 500 taka</a></li>
+								<li><a href="https://www.facebook.com/dmsalam">Order <img src="{{asset('content/payoneer.png')}}" height="30px" width="75px"/> card on your name by 500 taka</a></li>
 							</ul>
 						</div>
 					</div>
