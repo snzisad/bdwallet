@@ -1,9 +1,6 @@
+<?php $__env->startSection('title', "Profile"); ?>
 
-@extends("layouts.generalLayout")
-
-@section('title', "Profile")
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <div class="container">
 
@@ -18,7 +15,7 @@
                                 <a class="nav-item nav-link active" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="true"><i class="fa fa-history"></i> Exchange History</a>
                                 <a class="nav-item nav-link" id="nav-review-tab" data-toggle="tab" href="#nav-review" role="tab" aria-controls="nav-review" aria-selected="false"><i class="fa fa-comment"></i> My Review</a>
                                 <a class="nav-item nav-link" id="nav-settings-tab" data-toggle="tab" href="#nav-settings" role="tab" aria-controls="nav-settings" aria-selected="false"><i class="fa fa-cog"></i> Settings</a>
-                                <a href="{{asset('wallet')}}" class="nav-item nav-link"><i class="fa fa-money"></i> Wallet</a>
+                                <a href="<?php echo e(asset('wallet')); ?>" class="nav-item nav-link"><i class="fa fa-money"></i> Wallet</a>
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent" style="margin-top: 20px;">
@@ -37,32 +34,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($exchange_histories as $history)
+                                        <?php $__currentLoopData = $exchange_histories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $history): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <tr>
-                                            <td>{{ $history->send_from_data->name }}</td>
-                                            <td>{{ $history->send_to_data->name }}</td>
-                                            <td>{{ $history->send_amount }} {{ $history->send_from_data->currency->type }}</td>
-                                            <td> <a href="{{asset('/track/0/'.$history->exchange_id)}}">{{ $history->exchange_id }}</a></td>
-                                            <td>{{ $history->created_at }}</td>
+                                            <td><?php echo e($history->send_from_data->name); ?></td>
+                                            <td><?php echo e($history->send_to_data->name); ?></td>
+                                            <td><?php echo e($history->send_amount); ?> <?php echo e($history->send_from_data->currency->type); ?></td>
+                                            <td> <a href="<?php echo e(asset('/track/0/'.$history->exchange_id)); ?>"><?php echo e($history->exchange_id); ?></a></td>
+                                            <td><?php echo e($history->created_at); ?></td>
                                             <td>
-                                                @if($history->status == "Processing")
+                                                <?php if($history->status == "Processing"): ?>
                                                 <span class="status text-light bg-primary"><i class="fa fa-clock-o"></i> Processing</span>
-                                                @elseif($history->status == "Accepted")
+                                                <?php elseif($history->status == "Accepted"): ?>
                                                 <span class="status text-light bg-success"><i class="fa fa-check"></i> Success</span>
-                                                @else
+                                                <?php else: ?>
                                                 <span class="status text-light bg-danger"><i class="fa fa-close"></i> Failed</span>
-                                                @endif
+                                                <?php endif; ?>
                                             </td>
                                         </tr>
-                                        @endforeach
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </tbody>
                                 </table>
                             </div>
 
                             <!-- Review Tab -->
                             <div class="tab-pane fade" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-                                <form  class="col-md-7" method="post" action="{{route('saveReview')}}">
-                                    {{csrf_field()}}
+                                <form  class="col-md-7" method="post" action="<?php echo e(route('saveReview')); ?>">
+                                    <?php echo e(csrf_field()); ?>
+
                                     <div class="input-group mb-3">
                                         <label>Review</label>
                                         <div class="input-group-prepend">
@@ -76,17 +74,18 @@
                                     
                                     <div class="form-group">
                                         <label>Comment</label>
-                                        <Textarea class="form-control" name="comment">@if($review!=null){{$review->comment}}@endif</Textarea>
+                                        <Textarea class="form-control" name="comment"><?php if($review!=null): ?><?php echo e($review->comment); ?><?php endif; ?></Textarea>
                                     </div>
-                                    <input type = 'hidden' name="user_id" value = "{{ Auth::user()->id }}" />
+                                    <input type = 'hidden' name="user_id" value = "<?php echo e(Auth::user()->id); ?>" />
                                     <input type="submit" class="btn btn-success" value="Save"/>
                                 </form>
                             </div>
 
                             <!-- Settings Tab -->
                             <div class="tab-pane fade" id="nav-settings" role="tabpanel" aria-labelledby="nav-settings-tab">
-                                 <form class="col-md-7" method="post" action="{{route('changePassword')}}">
-                                    {{csrf_field()}}
+                                 <form class="col-md-7" method="post" action="<?php echo e(route('changePassword')); ?>">
+                                    <?php echo e(csrf_field()); ?>
+
 
                                     <div class="form-group">
                                         <label>Current Password</label>
@@ -115,4 +114,5 @@
 
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make("layouts.generalLayout", array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

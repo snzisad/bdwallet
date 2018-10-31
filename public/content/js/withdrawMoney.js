@@ -3,12 +3,11 @@ $('.wallet_id').on('change', function (e) {
 		$gateway = $(this).attr("gateway");
 		$position = e.target.selectedIndex;
 		$account = JSON.parse($gateway)[$position].account;
+		$name = JSON.parse($gateway)[$position].name;
 
+		$('.marchant_account_name').text("Our "+ $name +" Merchant Account");
 		$('.marchant_account').val($account);
 	}).trigger('change');
-
- 	//calculate from keystroke
-	// document.getElementsByName("amount_send")[0].onkeyup = calculateWalletReceiveAmount;
 
 	$(".amount_send")[0].onkeyup = calculateWalletReceiveAmount;
 
@@ -66,6 +65,7 @@ $('.wallet_id').on('change', function (e) {
 		      },
 		      success: function(data){
 				  console.log(data);
+				  $('.withdraw_account').text("Your " + data.to_data.name + " Account");
 				  $('.gateway_reserve_amount').text(data.to_data.reserve);
 				  $('.gateway_reserve_amount_type').text(data.to_data.currency.type);
 				  $(".amount_send").val(data.rate.from_rate);
