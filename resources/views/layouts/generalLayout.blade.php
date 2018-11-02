@@ -71,6 +71,8 @@
 									
 									@if(isset($admin_status->status))
 										<li><font color="#14C906" size="4px"><b>Online</b></font></li>
+									@else
+										<li><font color="#ff0000" size="4px"><b>Offline</b></font></li>
 									@endif
 									
 								</ul>
@@ -153,8 +155,8 @@
 							<ul class="cr_list">
 								<li><a href="#">FAQ</a></li>
 								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">About</a></li>
+								<li><a href="{{asset('privacy')}}">Privacy Policy</a></li>
+								<li><a href="{{asset('about')}}">About</a></li>
 								<li><a href="https://www.facebook.com/dmsalam">Order <img src="{{asset('content/payoneer.png')}}" height="30px" width="75px"/> card on your name by 500 taka</a></li>
 							</ul>
 						</div>

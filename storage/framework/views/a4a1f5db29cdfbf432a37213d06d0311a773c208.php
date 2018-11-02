@@ -72,6 +72,8 @@
 									
 									<?php if(isset($admin_status->status)): ?>
 										<li><font color="#14C906" size="4px"><b>Online</b></font></li>
+									<?php else: ?>
+										<li><font color="#ff0000" size="4px"><b>Offline</b></font></li>
 									<?php endif; ?>
 									
 								</ul>
@@ -157,8 +159,8 @@
 							<ul class="cr_list">
 								<li><a href="#">FAQ</a></li>
 								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="#">About</a></li>
+								<li><a href="<?php echo e(asset('privacy')); ?>">Privacy Policy</a></li>
+								<li><a href="<?php echo e(asset('about')); ?>">About</a></li>
 								<li><a href="https://www.facebook.com/dmsalam">Order <img src="<?php echo e(asset('content/payoneer.png')); ?>" height="30px" width="75px"/> card on your name by 500 taka</a></li>
 							</ul>
 						</div>

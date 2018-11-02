@@ -13,6 +13,14 @@
 
 Route::get('/reviews', 'HomeController@viewAllReview');
 
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
 Route::get('/contact', function () {
     return view('contact');
 });
